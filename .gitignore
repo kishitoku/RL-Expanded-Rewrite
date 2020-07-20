@@ -108,10 +108,14 @@ venv.bak/
 # Ren'py Projects
 *.rpa
 *.rpyc
+*.jpeg
+*.png
 /*.exe
 /renpy/
 /lib/
 /game/cache/
+/game/gui/
+/game/images/
 /game/saves/
 
 # Ren'py Log Files
