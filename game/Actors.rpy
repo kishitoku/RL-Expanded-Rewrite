@@ -62,7 +62,7 @@ init -1 python:
             }
 
     class Player(ADVCharacter):
-        def __init__(self, name = "Zero", color = "green", **kwargs):
+        def __init__(self, name = "Zero", kind = None, color = "green", **properties):
             # default player name is Zero
             self.name = name
             # Color can currently be green, white, or black. May need checker.
@@ -78,7 +78,9 @@ init -1 python:
             # Set an initial income value.
             self.income = 10
 
-        def copy
+        #Copy method from character.py, line 431, PyTom <pytom@bishoujo.us>
+        def copy(self, name = NotSet, **properties):
+            return type(self)(name, kind=self, **properties)
 
     class Girl(ADVCharacter):
         def __init__(
@@ -106,3 +108,7 @@ init -1 python:
             self.addictionResist = addictionResist
 
             self.sex = Sex(actions)
+
+        #Copy method from character.py, line 431, PyTom <pytom@bishoujo.us>
+        def copy(self, name = NotSet, **properties):
+            return type(self)(name, kind=self, **properties)
