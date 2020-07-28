@@ -5,11 +5,22 @@ init -1 python:
     class Sex(object):
         def __init__(self, actions = 3):
             super(Sex, self).__init__()
-            self.arg = arg
-            self.actions = actions
+            self._actions = actions
+
+        def addCount(self, action, count):
+            self._sexCounts[action] += count
+
+        def addSeen(self, part, count):
+            self._seen[part] += count
+
+        def getCount(self, action):
+            return self._sexCounts[action]
+
+        def getSeen(self, part):
+            return self._seen[part]
 
         # Seen counts.
-        self.seen = {
+        self._seen = {
             'bra': 0,
             'chest': 0,
             'panties': 0,
@@ -19,7 +30,7 @@ init -1 python:
 
         # Sex history. Why is so much recorded? Trim if possible.
         # Lets move sexCounts to some sort of stats holder.
-        self.sexCounts = {
+        self._sexCounts = {
             'anal': 0,
             'assSlapped': 0,
             'blowjob': 0,
@@ -53,19 +64,19 @@ init -1 python:
     class Player(ADVCharacter):
         def __init__(self, name = "Zero", color = "green", **kwargs):
             # default player name is Zero
-            self.name = name
+            self._name = name
             # Color can currently be green, white, or black. May need checker.
-            self.color = color
+            self._color = color
             # Set level of the player to 1. May add func to calc level.
-            self.level = 1
+            self._level = 1
             # Set current xp to 0
-            self.xp = 0
+            self._xp = 0
             # Inventory is a simple list.
-            self.inventory[]
+            self._inventory[]
             # Money is stored as a separate value. Default start of $0
-            self.cash = 0
+            self._cash = 0
             # Set an initial income value.
-            self.income = 10
+            self._income = 10
 
     class Girl(ADVCharacter):
         def __init__(
@@ -75,18 +86,21 @@ init -1 python:
                 love = 0,
                 lust = 0,
                 obed = 0,
+                actions,
                 addiction
                 addictionRate = 0,
                 addictionResist = 0,
                 ):
             # Basic information:
-            self.name = name
-            self.inbt = inbt
-            self.love = love
-            self.lust = lust
-            self.obed = obed
-            self.xp = 0
-            self.level = 0
-            self.addiction = addiction
-            self.addictionRate = addictionRate
-            self.addictionResist = addictionResist
+            self._name = name
+            self._inbt = inbt
+            self._love = love
+            self._lust = lust
+            self._obed = obed
+            self._xp = 0
+            self._level = 0
+            self._addiction = addiction
+            self._addictionRate = addictionRate
+            self._addictionResist = addictionResist
+
+            self._sex = Sex(actions)
