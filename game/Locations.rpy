@@ -3,7 +3,7 @@
 # Location Class allows for quick creation of new locations.
 # Add new base game locations to this file.
 
-init -1 python
+init -2 python
 
     class Location(renpy.store.object):
         def __init__(self,
@@ -16,6 +16,10 @@ init -1 python
             self.adjacent = adjacent
             self.locked = locked
             self.people = []
+            self.outside = outside
+
+            #create function to handle backgrounds instead. Need day, evening, night
+            #or just a regular backgroun. Function should choose based on outside.
             self.background_ = "{}{}.png".format(path,name)
 
         def getLocked():
@@ -36,9 +40,20 @@ init -1 python
         def getPeople():
             return self.people
 
-label locationMenu(location):
+label locationMenu(Location):
 
     python:
+
+        #consider creating a function to do this instead
+        # Creates a list of tuples using the location name as a base.
         adjacent = []
-        for p in location.getAdjacent():
+        for p in Location.getAdjacent():
+            # Replaces any spaces with underscores and forces lowercase on the string
+            # for the second entry. This will be used as the format for location labels.
             adjacent.append(tuple(p,p.lower(p.replace(" ","_"))))
+
+        # Displays a menu of locations found in adjacent
+        nextLoc = renpy.display_menu(adjacent, interact = True)
+
+        # Jumps to chosen location label
+        renpy.jump(nextLoc)
