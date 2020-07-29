@@ -22,8 +22,12 @@ init -2 python
             #or just a regular backgroun. Function should choose based on outside.
             self.background_ = "{}{}.png".format(path,name)
 
-        def setBackground(name, path, public):
-            pass
+        def getBackground(time_):
+            if self.public:
+                return (re.sub('[ ]','_',re.sub('[']','',"{}{}_{}.png".format(self.path,self.name,time_))))
+
+            else:
+                return (re.sub('[ ]','_',re.sub('[']','',"{}{}.png".format(self.path,self.name))))
 
         def getLocked():
             return self.isLocked
@@ -53,7 +57,7 @@ label locationMenu(Location):
         for l in Location.getAdjacent():
             # Replaces any spaces with underscores and forces lowercase on the string
             # for the second entry. This will be used as the format for location labels.
-            adjacent.append(tuple(l,l.lower(re.sub('[ ']','',l))))
+            adjacent.append(tuple(l,l.lower((re.sub('[ ]','_',re.sub('[']','',l))))))
 
         # Displays a menu of locations found in adjacent
         nextLoc = renpy.display_menu(adjacent, interact = True)
