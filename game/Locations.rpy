@@ -11,22 +11,25 @@ init -2 python
                     adjacent,
                     locked = False,
                     path = "backgrounds/",
-                    outside = False,):
+                    public = False,):
             self.name = name
             self.adjacent = adjacent
-            self.locked = locked
+            self.isLocked = locked
             self.people = []
-            self.outside = outside
+            self.public = public
 
             #create function to handle backgrounds instead. Need day, evening, night
             #or just a regular backgroun. Function should choose based on outside.
             self.background_ = "{}{}.png".format(path,name)
 
+        def setBackground(name, path, public):
+            pass
+
         def getLocked():
-            return self.locked
+            return self.isLocked
 
         def setLocked(locked):
-            self.locked = locked
+            self.isLocked = locked
 
         def getAdjacent():
             return self.adjacent
@@ -47,10 +50,10 @@ label locationMenu(Location):
         #consider creating a function to do this instead
         # Creates a list of tuples using the location name as a base.
         adjacent = []
-        for p in Location.getAdjacent():
+        for l in Location.getAdjacent():
             # Replaces any spaces with underscores and forces lowercase on the string
             # for the second entry. This will be used as the format for location labels.
-            adjacent.append(tuple(p,p.lower(p.replace(" ","_"))))
+            adjacent.append(tuple(l,l.lower(re.sub('[ ']','',l))))
 
         # Displays a menu of locations found in adjacent
         nextLoc = renpy.display_menu(adjacent, interact = True)
