@@ -18,10 +18,6 @@ init -2 python
             self.people = []
             self.public = public
 
-            #create function to handle backgrounds instead. Need day, evening, night
-            #or just a regular backgroun. Function should choose based on outside.
-            self.background_ = "{}{}.png".format(path,name)
-
         def getBackground(time_):
             if self.public:
                 return (re.sub('[ ]','_',re.sub('[']','',"{}{}_{}.png".format(self.path,self.name,time_))))
