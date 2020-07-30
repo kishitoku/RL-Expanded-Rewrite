@@ -18,29 +18,29 @@ init -2 python
             self.people = []
             self.public = public
 
-        def getBackground(time_):
+        def getBackground(self, time_):
             if self.public:
-                return (re.sub('[ ]','_',re.sub('[']','',"{}{}_{}.png".format(self.path,self.name,time_))))
+                return re.sub('[ ]','_',re.sub('[']','',"{}{}_{}.png".format(self.path,self.name,time_)))
 
             else:
-                return (re.sub('[ ]','_',re.sub('[']','',"{}{}.png".format(self.path,self.name))))
+                return re.sub('[ ]','_',re.sub('[']','',"{}{}.png".format(self.path,self.name)))
 
-        def getLocked():
+        def getLocked(self):
             return self.isLocked
 
-        def setLocked(locked):
+        def setLocked(self, locked):
             self.isLocked = locked
 
-        def getAdjacent():
+        def getAdjacent(self):
             return self.adjacent
 
-        def clearLocation():
+        def clearLocation(self):
             self.people.clear()
 
-        def addPerson(person):
+        def addPerson(self, person):
             self.people.append(person)
 
-        def getPeople():
+        def getPeople(self):
             return self.people
 
 label locationMenu(Location):
