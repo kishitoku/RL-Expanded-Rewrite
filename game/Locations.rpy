@@ -6,17 +6,13 @@
 init -2 python
 
     class Location(renpy.store.object):
-        def __init__(self,
-                    name,
-                    adjacent,
-                    locked = False,
-                    path = "backgrounds/",
-                    public = False,):
+        def __init__(self, name, adjacent, **kwargs):
             self.name = name
             self.adjacent = adjacent
-            self.isLocked = locked
             self.people = []
-            self.public = public
+            self.dayCycle = kwargs.get(dayCycle, False)
+            self.isLocked = kwargs.get(locked, False)
+            self.public = kwargs.get(public, 100)
 
         def getBackground(self, current_time):
             """ Returns background image and path based on time of day.
@@ -71,9 +67,10 @@ init -2 python
 
 
 # Test definition using Location.
-define university_square = Location("University Square", ["Classroom","Danger Room"])
+define university_square = Location("University Square", ["Classroom","Danger Room"],
+                            dayCycle=True)
 define classroom = Location("Classroom",["University Square","Danger Room"])
-define danger_room = Location("Danger Room",["University Square","Classroom"])
+define danger_room = Location("Danger Room",["University Square","Classroom"], public = 50)
 
 # Test label using Location.
 label university_square
