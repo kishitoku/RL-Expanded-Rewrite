@@ -15,16 +15,20 @@ init -2 python:
             self.isLocked = kwargs.get('locked', False)
             self.path = kwargs.get('path', "/images/backgrounds/")
             self.public = kwargs.get('public', 100)
+            #self.menuOptions = kwargs.get('menuOptions', [])
 
 
             # Replaces any spaces with underscores and forces lowercase on the string
             # for use as a jump to label. This will be used as the format for location labels.
-            self.jumpTo = [re.sub('[ ]','_',re.sub("[']",'',loc)).lower() for loc in adjacent]
             # Iterate through adjacent, create a tuple, and append to self.adjacent
-            self.adjacent = [(adjacent[i], self.jumpTo[i]) for i in range(0, len(adjacent))]
+            self.adjacent = [(adjacent[i], re.sub('[ ]','_',re.sub("[']",'',adjacent[i])).lower())
+                                for i in range(0, len(adjacent))]
             # Add a leave line at the end.
             self.adjacent.append(("Don't go anywhere",self.trimmed))
 
+            # Uses above method to create location specific menu options from a list of strings.
+            self.menuOptions = [(kwargs.get('menuOptions', [])[i], re.sub('[ ]','_',re.sub("[']",'',kwargs.get('menuOptions', [])[i])).lower())
+                                    for i in range(0, len(kwargs.get('menuOptions', [])))]
             # Defines renpy images for location background based on if the location has
             # time variants or not
             if self.dayCycle:
@@ -65,6 +69,10 @@ init -2 python:
         def getPeople(self):
             return self.people
 
+        def getMenu(self):
+            return self.menuOptions
+
+
 
     def locationMenu(Location):
 
@@ -76,9 +84,9 @@ init -2 python:
 
 
 # Test definition using Location.
-define university_square = Location("University Square", adjacent=["Classroom","Danger Room"],
+define university_square = Location("University Square", ["Classroom","Danger Room"],
                             dayCycle=True)
-define classroom = Location("Classroom",["University Square","Danger Room"])
+define classroom = Location("Classroom",["University Square","Danger Room"], public = 80, menuOptions = ["TEST"])
 define danger_room = Location("Danger Room",["University Square","Classroom"], public = 50)
 
 # Test label using Location.
@@ -125,19 +133,34 @@ label danger_room:
 label classroom:
     $ renpy.scene()
     $ renpy.show(classroom.getBackground())
-    menu:
-        "You are in the Classroom. What would you like to do?"
 
-        "Chat":
-            #call Chat
-            pass
-        "Wait" if current_time != "Night":
-            "You wait around a bit."
-            # call Wait
-            # call EventCalls
-            # call Girls_Location
-            pass
-        "Go somewhere else":
-            $ locationMenu(classroom)
+    $ dynamicMenu(classroom)
+    # menu:
+    #     "You are in the Classroom. What would you like to do?"
+    #
+    #     "Chat":
+    #         #call Chat
+    #         pass
+    #     "Wait" if current_time != "Night":
+    #         "You wait around a bit."
+    #         # call Wait
+    #         # call EventCalls
+    #         # call Girls_Location
+    #         pass
+    #     "Go somewhere else":
+    #         $ locationMenu(classroom)
+    #
+    # jump classroom
 
-    jump classroom
+label test:
+    "Bike"
+    "Bike"
+    "Bicycle"
+    "..."
+    "Ice"
+    "Ice"
+    "Icicle"
+    "..."
+    "Test"
+    "Test"
+    "Tes... WHAT THA FUCK ARE YOU LOOKING AT!!!"
