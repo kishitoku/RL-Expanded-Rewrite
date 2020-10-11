@@ -76,8 +76,8 @@ init -2 python:
 
 
 # Test definition using Location.
-define university_square = Location("University Square", adjacent=["Classroom","Danger Room"],
-                            dayCycle=True)
+define university_square = Location("University Square", adjacent=
+                            ["Classroom","Danger Room", "Image Test"], dayCycle=True)
 define classroom = Location("Classroom",["University Square","Danger Room"])
 define danger_room = Location("Danger Room",["University Square","Classroom"], public = 50)
 
@@ -97,6 +97,8 @@ label university_square:
             # call EventCalls
             # call Girls_Location
             pass
+        "Image System Test":
+            jump imageTest
         "Go somewhere else":
             $ locationMenu(university_square)
 
