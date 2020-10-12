@@ -1,6 +1,6 @@
 
 define current_time = "Day"
-define test = Character(name="test", image = "test")
+define test = Character(name="Rogue", image = "test")
 
 label start:
     jump university_square

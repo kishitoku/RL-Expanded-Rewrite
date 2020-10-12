@@ -7,42 +7,65 @@
 # Attempting to define a layeredImage here.
 # TODO: Transition this to a statement equivalannt.
 # TODO: Tie into Girl().
-layeredimage test standing:
+layeredimage test:
     #image_format "character/test/{image}.png"
 
     # body > head (eyes > mouth > eyebrows > hair) > breasts > pubes > arms
-    group body auto:
-        attribute bare default
+    attribute body null
+    group body if_any "bare" auto variant "bare":
+        anchor (0.0,0.0)
+        zoom 0.75
+        attribute none default
 
-    group body auto variant "hairy":
-        attribute bare default
+    group body if_not "bare" auto variant "hairy":
+        anchor (0.0,0.0)
+        zoom 0.75
+        attribute none default
 
     group head auto prefix "head":
+        anchor (0.0,0.0)
+        zoom 0.75
         attribute base default
 
     group brows auto prefix "brows":
+        anchor (0.0,0.0)
+        zoom 0.75
         attribute normal default
 
     group eyes auto prefix "eyes":
+        anchor (0.0,0.0)
+        zoom 0.75
         attribute normal default
 
-    group mouth auto:
+    group mouth auto prefix "mouth":
+        anchor (0.0,0.0)
+        zoom 0.75
         attribute normal default
 
     group hair auto:
+        anchor (0.0,0.0)
+        zoom 0.75
         attribute normal default
-
-    group chest auto:
-        attribute bare default
 
 #    attribute pubic null #IDEA: May not work, possible bug
 #    group pubic auto
 
-    group arms auto:
-        attribute bare default
+    attribute arms null
+    group arms if_any "up" auto variant "up":
+        anchor (0.0,0.0)
+        zoom 0.75
+        attribute collargloves default
 
-    group arms auto variant "up":
-        attribute bare default
+    group arms if_not "up" auto variant "normal":
+        anchor (0.0,0.0)
+        zoom 0.75
+        attribute collargloves default
+
+    # Chest layer must happen after arms to avoid bad overlapping.
+    group chest auto:
+        anchor (0.0,0.0)
+        zoom 0.75
+        attribute none default
 
     # bra > panty > inner > lower > dress > outer > neck > wrist
 #    group bra auto
@@ -89,11 +112,16 @@ label imageTest:
 
     show test
 
+    "This is the layeredimage system test."
+
     #Base test
     test bare "I should be bare."
     test "I should even be bare down there!"
-    test hairy "Not any more though."
-    test hairy gloves "I prefer to wear gloves even when naked."
+    show test -bare
+    test none "Not any more though."
+    show test -none
+    test "I prefer to wear gloves even when naked."
+    show test up
     test "If this worked, the test should end now and return you to the menu."
 
     jump university_square
