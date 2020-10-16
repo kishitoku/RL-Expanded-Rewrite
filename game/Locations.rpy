@@ -74,17 +74,14 @@ init -2 python:
         # Jumps to chosen location label
         renpy.jump(nextLoc)
 
-
-# Test definition using Location.
-define testenv = Location("University Square", adjacent=
+define university_square = Location("University Square", adjacent=
                             ["Classroom","Danger Room", "Image Test"], dayCycle=True)
 define classroom = Location("Classroom",["University Square","Danger Room"])
 define danger_room = Location("Danger Room",["University Square","Classroom"], public = 50)
 
-# Test label using Location.
-label testenv:
+label university_square:
     $ renpy.scene()
-    $ renpy.show(testenv.getBackground())
+    $ renpy.show(university_square.getBackground())
     menu:
         "You are in the University Square. What would you like to do?"
 
@@ -97,12 +94,10 @@ label testenv:
             # call EventCalls
             # call Girls_Location
             pass
-        "Image System Test":
-            jump imageTest
         "Go somewhere else":
-            $ locationMenu(testenv)
+            $ locationMenu(university_square)
 
-    jump testenv
+    jump university_square
 
 label danger_room:
     $ renpy.scene()
