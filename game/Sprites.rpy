@@ -124,4 +124,4 @@ label imageTest:
     show test up
     test "If this worked, the test should end now and return you to the menu."
 
-    jump university_square
+    jump testenv

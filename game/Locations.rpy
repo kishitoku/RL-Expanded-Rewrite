@@ -76,15 +76,15 @@ init -2 python:
 
 
 # Test definition using Location.
-define university_square = Location("University Square", adjacent=
+define testenv = Location("University Square", adjacent=
                             ["Classroom","Danger Room", "Image Test"], dayCycle=True)
 define classroom = Location("Classroom",["University Square","Danger Room"])
 define danger_room = Location("Danger Room",["University Square","Classroom"], public = 50)
 
 # Test label using Location.
-label university_square:
+label testenv:
     $ renpy.scene()
-    $ renpy.show(university_square.getBackground())
+    $ renpy.show(testenv.getBackground())
     menu:
         "You are in the University Square. What would you like to do?"
 
@@ -100,9 +100,9 @@ label university_square:
         "Image System Test":
             jump imageTest
         "Go somewhere else":
-            $ locationMenu(university_square)
+            $ locationMenu(testenv)
 
-    jump university_square
+    jump testenv
 
 label danger_room:
     $ renpy.scene()
