@@ -145,4 +145,5 @@ label intro:
                 #! with vpunch
                 r "Well I never!"
                 r "Hmph, I have to give the tour anyways, so get mov'in. . ."
-    # LABEL ENDS
+
+    jump my_room

@@ -74,10 +74,46 @@ init -2 python:
         # Jumps to chosen location label
         renpy.jump(nextLoc)
 
+define my_room = Location("My Room", adjacent=[], dayCycle=True)
 define university_square = Location("University Square", adjacent=
-                            ["Classroom","Danger Room", "Image Test"], dayCycle=True)
+                            ["My Room", "Classroom","Danger Room"], dayCycle=True)
 define classroom = Location("Classroom",["University Square","Danger Room"])
 define danger_room = Location("Danger Room",["University Square","Classroom"], public = 50)
+
+# TODO: Add locations for;
+
+# TODO:  Showers
+# TODO:  Pool
+# TODO:  Xavier's Study
+
+label my_room:
+    $ renpy.scene()
+    $ renpy.show(my_room.getBackground())
+    menu:
+        "You are in your room. What would you like to do?"
+        
+        "Chat":
+            pass
+        "Study":
+            pass
+        "Lock Door": # TrainDoc: Originally called "Lock the door"
+            pass
+        "Sleep":
+            pass
+        "Shop": # TrainDoc: wtf are we going to do w/ the shop? it's so half baked lol
+            pass
+        "Special Options":
+            pass
+            #call SOpts
+        "Wait" if current_time != "Night":
+            "You wait around a bit."
+            # call Wait
+            # call EventCalls
+            # call Girls_Location
+            pass
+        "Leave":
+            jump university_square
+    jump my_room
 
 label university_square:
     $ renpy.scene()
