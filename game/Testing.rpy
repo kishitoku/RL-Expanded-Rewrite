@@ -23,9 +23,9 @@ label testenv:
             pass
         "Image System Test":
             jump imageTest
-        "Main Menu":
-            $ MainMenu(confirm=False)()
         "Go somewhere else":
             $ locationMenu(testenv)
+        "Main Menu":
+            $ MainMenu(confirm=False)()
 
     jump testenv
