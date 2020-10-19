@@ -31,6 +31,8 @@ init -2 python:
                 renpy.image("bg {}_{}".format(self.trimmed,"day") ,"{}{}_{}.png".format(self.path,self.trimmed,"day"))
                 renpy.image("bg {}_{}".format(self.trimmed,"evening") ,"{}{}_{}.png".format(self.path,self.trimmed,"evening"))
                 renpy.image("bg {}_{}".format(self.trimmed,"night") ,"{}{}_{}.png".format(self.path,self.trimmed,"night"))
+            #TODO: Oni's game uses layeredimage for the player's room (and the Girls' rooms?), so we either need to adjust this system or re-implement this system
+            
 
             else:
                 renpy.image("bg {}".format(self.trimmed) ,"{}{}.png".format(self.path,self.trimmed))
