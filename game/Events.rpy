@@ -29,7 +29,7 @@ $ PlayerSkinTone = "#028800"
 
 label intro:
     $ renpy.scene()
-    $ renpy.show("study_day")
+    show study_day
 
     # TrainDoc:
     # All caps are left-over from when I was manually transcribing from 0.991h, sorry.
