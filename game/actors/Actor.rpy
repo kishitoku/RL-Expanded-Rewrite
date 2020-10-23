@@ -39,6 +39,7 @@
 
 init -2 python:
     import re
+
     class Actor(renpy.store.object):
         """docstring for Actor"""
         def __init__(self, actorName, name, **kwargs):
@@ -52,7 +53,11 @@ init -2 python:
             # self.actions = #???
 
             # Actor Stats (relative to the player)
-            self.actorStats = kwargs.get('actorStats',{'addiction':0,'addRate':0,'addResist':0,'inhbt':1000,'love':0,'lust':0,'obed':0})
+            self.actorStats = kwargs.get('actorStats',{
+                                            'level':0,'xp':0,'sexExp':0,
+                                            'maxActions':3,'actions':3, # max actions during sex & counter of # of avaliable actions
+                                            'addiction':0,'addRate':0,'addResist':0,
+                                            'inhbt':1000,'love':0,'lust':0,'obed':0})
 
             # Sexual Stats (relative to player and other actors) (may need to rename some variables here when actions are implemented)
 
@@ -63,7 +68,7 @@ init -2 python:
             self.actorExposed = kwargs.get('actorExposed',{
                                             'exposedUnderwear':0,'exposedBody':0,'exposedChest':0,'exposedGenitals':0,'exposedLezSex':0,}) 
                                             # This Actor exposed what to Player? (/seen doing what by Player?)
-
+            # TODO: move sex acts to object base?
             self.actorSexActs = kwargs.get('actorActs',{
                                             'actMassaged':0,'actKissed':0,'actStripped':0,'actSlept':0, # slept with player (not sex)
                                             'actFondleChest':0,'actFondleButt':0,'actSlapButt':0,
@@ -74,7 +79,9 @@ init -2 python:
                                             'actInsertAnus':0,'actInsertVaginal':0,
                                             'actDildoAnus':0,'actDildoVagina':0,'actVibrator':0,'actButtplug':0,
                                             'actCreampieSwallow':0,'actCreampieAnus':0,'actCreampieVagina':0,
-                                            'actOrgasms':0,'actEncounterOrgasams':0,
-                                            'actCaught':0}) 
+                                            'actOrgasms':0,
+                                            'actEncounterOrgasams':0,'actCaught':0})
                                             # This Actor has done what with Player? (/Player has done to Actor)
-                                            
+            # A dictionary serving to hold active emotions and other things of note, this is a hold-over from the og game and needs to be replaced!
+            self.actorStatus = kwargs.get('actorStatus',{'normal':0})
+
