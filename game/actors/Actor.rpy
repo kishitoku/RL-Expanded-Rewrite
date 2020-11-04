@@ -1,9 +1,9 @@
 # Base Actor Class (and examples?)
 #
 # Actors will be anything (usually a character/person) the player can interact with
-# 
+#
 # Example Group
-#   Example Sub-Group 
+#   Example Sub-Group
 #       Written Name (variableName) (type) (other info)
 #
 # Actors contain:
@@ -37,18 +37,94 @@
 #
 # NOTE: Actors do not handle wardrobe changes!
 
+# NOTE: The following are for a base template of trainer games
+"""
+Just ideas here:
+    Inventory
+    Character Image (Custom LayeredImage)
+    Wardrobe
+
+    Possible Actions
+    Names and Alternate Names
+
+"""
+
+"""
+ADVCharacter INTENT:
+    DIALOG (say)
+        (who & what, prefixes and suffixes)
+        (html tags)
+        (transitions)
+        (history)
+    CHARACTER IMAGE (images)
+    PREDICTION (images)
+        (image pre-caching)
+
+This is used primarily for dialog purposes.
+"""
+
+"""
+Actor INTENT:
+    (data storage) RELATIONSHIPS (helper functions)
+    ADVCharacter extended functionality
+    INVENTORY (object)
+    WARDROBE (object)
+    SCHEDULE (?)
+    SEX
+    STATS (dynamic)
+        parsed variables
+        relationships
+        ex: Actor.statA (after creation)
+    LOCATION
+        current, past, going, home
+    ACTIONS (MAYBE: integrate action history w/ dialog history?)
+        current,
+"""
+
 init -2 python:
     import re
 
-    class Actor(renpy.store.object):
+
+    # Inventory can be used in two ways:
+    # Like a list - Inventory.append()
+    # Or like an object - Inventory._money
+    class Inventory(renpy.store.object):
+        """ """
+        def __init__(self, inv, money):
+            self._inv = inv
+            self._money = money
+
+        def __getitem__(self, item):
+            return self._inv[item]
+
+        def __setitem__(self, item):
+            pass
+
+
+
+    class Schedule(renpy.store.object):
+        """ """
+        def __init__(self):
+            pass
+
+
+    # Wardrobe takes care of tracking a characters complete clothes and outfit sets
+    class Wardrobe(renpy.store.object):
+        """ """
+        def __init__(self):
+            pass
+
+
+    class Actor(renpy.store.ADVCharacter):
         """docstring for Actor"""
         def __init__(self, actorName, name, **kwargs):
             # Actor Information
             self.actorName = actorName  # Programmers needs come first :P
             self.name = name
+            # Pet names
             self.petNames = kwargs.get('names',[self.name,'Nickname','Pet-Name'])
             # self.petName = petNames[0]
-            self.dialogColor = kwargs.get('dialogColor',"#000000")
+            self.dialogColor = kwargs.pop('dialogColor',"#000000")
 
             # self.actions = #???
 
@@ -62,17 +138,17 @@ init -2 python:
             # Sexual Stats (relative to player and other actors) (may need to rename some variables here when actions are implemented)
 
             self.actorSeen = kwargs.get('actorSeen',{
-                                            'playerUnderwear':0,'playerBody':0,'playerChest':0,'playerGenitals':0,'lezSex':0}) 
+                                            'playerUnderwear':0,'playerBody':0,'playerChest':0,'playerGenitals':0,'lezSex':0})
                                             # Player and others exposed what to this Actor?
 
             self.actorExposed = kwargs.get('actorExposed',{
-                                            'exposedUnderwear':0,'exposedBody':0,'exposedChest':0,'exposedGenitals':0,'exposedLezSex':0,}) 
+                                            'exposedUnderwear':0,'exposedBody':0,'exposedChest':0,'exposedGenitals':0,'exposedLezSex':0,})
                                             # This Actor exposed what to Player? (/seen doing what by Player?)
             # TODO: move sex acts to object base?
             self.actorSexActs = kwargs.get('actorActs',{
                                             'actMassaged':0,'actKissed':0,'actStripped':0,'actSlept':0, # slept with player (not sex)
                                             'actFondleChest':0,'actFondleButt':0,'actSlapButt':0,
-                                            'actFondleAnus':0,'actFondleGenitals':0, 
+                                            'actFondleAnus':0,'actFondleGenitals':0,
                                             'actLickChest':0,'actLickAnus':0,'actLickGenitals':0,
                                             'actHandjob':0,'actTitjob':0,'actBlowjob':0,'actFootjob':0,
                                             'actHotdog':0,'actMasturbate':0,'actAnal':0,'actVaginal':0,
@@ -84,4 +160,3 @@ init -2 python:
                                             # This Actor has done what with Player? (/Player has done to Actor)
             # A dictionary serving to hold active emotions and other things of note, this is a hold-over from the og game and needs to be replaced!
             self.actorStatus = kwargs.get('actorStatus',{'normal':0})
-
