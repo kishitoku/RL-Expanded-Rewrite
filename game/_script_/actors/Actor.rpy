@@ -90,8 +90,6 @@ init -2 python:
         def __setitem__(self, item):
             pass
 
-
-
     class Schedule(renpy.store.object):
         """ """
         def __init__(self):
