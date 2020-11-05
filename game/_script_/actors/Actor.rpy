@@ -39,24 +39,14 @@
 
 # NOTE: The following are for a base template of trainer games
 """
-Just ideas here:
-    Inventory
-    Character Image (Custom LayeredImage)
-    Wardrobe
-
-    Possible Actions
-    Names and Alternate Names
-
-"""
-
-"""
 ADVCharacter INTENT:
+    (this is set by Renpy devs, not us)
     DIALOG (say)
         (who & what, prefixes and suffixes)
         (html tags)
         (transitions)
         (history)
-    CHARACTER IMAGE (images)
+    CHARACTER IMAGE (images) (Custom LayeredImage)
     PREDICTION (images)
         (image pre-caching)
 
