@@ -1,7 +1,4 @@
 # Image system based on LayeredImage()
-#
-#
-#
 
 
 # Attempting to define a layeredImage here.
@@ -103,25 +100,3 @@ layeredimage test:
     group overlay auto variant "pussy" multiple
 
     group overlay auto variant "face" multiple
-
-
-# Test label for layeredimage
-# TODO: Make a proper sprite test environment
-# TODO: Remove this label
-label imageTest:
-
-    show test
-
-    "This is the layeredimage system test."
-
-    #Base test
-    test bare "I should be bare."
-    test "I should even be bare down there!"
-    show test -bare
-    test none "Not any more though."
-    show test -none
-    test "I prefer to wear gloves even when naked."
-    show test up
-    test "If this worked, the test should end now and return you to the menu."
-
-    jump testenv
