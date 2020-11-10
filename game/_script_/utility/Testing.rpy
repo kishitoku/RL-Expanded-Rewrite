@@ -37,8 +37,7 @@ label wardTest:
     # "Outfit Piece Logged"
     menu:
         "Get Piece Names":
-            $ print(exampleOutfit.getLayers(False))
-            # $ exampleOutfit.getLayers(True)
+            $ print(exampleOutfit.getLayers())
         "Back":
             jump testenv
         # "Main Menu":

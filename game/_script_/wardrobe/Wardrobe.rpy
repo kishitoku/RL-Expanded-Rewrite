@@ -2,6 +2,23 @@
 
 init -2 python:
 
+    # Wardrobe takes care of tracking a characters complete clothes and outfit sets
+    class Wardrobe(renpy.store.object):              
+        def __init__(self, fallback, outfits):
+            """
+            Wardrobe contains the Outfits for a character 
+            and handles changing the active outfit
+
+            :param fallback: fallback/default outfit for a character
+            :type fallback: Outfit(renpy.store.object)
+            :param outfits: Collection of possible outfits for Actor
+            :type outfits: Set (TODO: change data structure used?)
+            """
+            self.active = fallback
+            self.fallback = fallback
+            self.outfits = outfits
+
+
     # single state of a characters current clothing, data store
     # collection of clothing pieces and associated values for things character wears
     class Outfit(renpy.store.object):
@@ -18,14 +35,14 @@ init -2 python:
             self._shame = 0 # move this over to actor?
             
             # outfit layers
-            self.panties = kwargs.get('panties',"N/A") # panties
-            self.bra = kwargs.get('bra',"N/A") # bra
-            self.legs = kwargs.get('leg',"N/A") # below bottoms
-            self.inner = kwargs.get('inner',"N/A") # inner top
-            self.bottom = kwargs.get('bottom',"N/A") # legs
-            self.dress = kwargs.get('dress',"N/A") # duh
-            self.top = kwargs.get('top',"N/A") # 
-            self.outer = kwargs.get('outer',"N/A") #
+            self.panties = kwargs.pop('panties',"N/A") # panties
+            self.bra = kwargs.pop('bra',"N/A") # bra
+            self.legs = kwargs.pop('leg',"N/A") # below bottoms
+            self.inner = kwargs.pop('inner',"N/A") # inner top
+            self.bottom = kwargs.pop('bottom',"N/A") # legs
+            self.dress = kwargs.pop('dress',"N/A") # "full-body" clothing
+            self.top = kwargs.pop('top',"N/A") # upper body
+            self.outer = kwargs.pop('outer',"N/A") # upper body (ex: jackets, coats)
 
             self.layers = [self.panties, self.bra, self.legs, 
                             self.inner, self.bottom, self.dress, self.top, self.outer]
@@ -41,17 +58,11 @@ init -2 python:
                 6 top
                 7 outer
         """
-        def getLayers(self, justPrint):
-            if justPrint:
-                for i, v in enumerate(self.layers):
-                    print("Layer {}: {}".format(i,v))
-                return
+        def getLayers(self):
             strOut = ""
             for i, v in enumerate(self.layers):
                 strOut += "Layer {}: {}\n".format(i,v)
-                if i+1 > len(self.layers):
-                    strOut += "Layer {}: {}".format(i,v)
-                renpy.log(strOut)
+                # renpy.log(strOut)
             return strOut
 
         def getExposure(self):
