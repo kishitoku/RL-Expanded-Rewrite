@@ -23,21 +23,6 @@ Actor INTENT:
 init -2 python:
     import re
 
-    # Inventory can be used in two ways:
-    # Like a list - Inventory.append()
-    # Or like an object - Inventory._money
-    class Inventory(renpy.store.object):
-        """ """
-        def __init__(self, inv, money):
-            self._inv = inv
-            self._money = money
-
-        def __getitem__(self, item):
-            return self._inv[item]
-
-        def __setitem__(self, item):
-            pass
-
     class Schedule(renpy.store.object):
         """ """
         def __init__(self):
@@ -73,16 +58,16 @@ init -2 python:
 
             ### INVENTORY
 
-            # Construct Actor's Inventory(renpy.store.object)
+            # Construct Actor's Inventory(renpy.store.object) (_script_/actors/Inventory.rpy)
             # TODO: Contains ?
             self.inventory = Inventory()
 
             ### CLOTHING AND WARDROBE
 
-            # Construct Actor's Wardrobe(renpy.store.object)
+            # Construct Actor's Wardrobe(renpy.store.object) (_script_/actors/Wardrobe.rpy)
             # Contains a default fallback outfit and a Set of possible outfits
             self.wardrobe = Wardrobe(kwargs.pop('fallback',"nude"),
                                         kwargs.pop('outfits',{"nude","clothed"}))
-            # Set Actor's Active Outfit(renpy.store.object)
+            # Set Actor's Active Outfit(renpy.store.object) (_script_/actors/Outfit.rpy)
             self.outfit = wardrobe.active
 

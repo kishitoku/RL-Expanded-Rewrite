@@ -1,26 +1,10 @@
-# wardrobe can call an outfit, events, actors, image handler
+# Outfit Class
+#
+# Instanced for all Actor(renpy.store.object) objects
 
 init -2 python:
-
-    # Wardrobe takes care of tracking a characters complete clothes and outfit sets
-    class Wardrobe(renpy.store.object):              
-        def __init__(self, fallback, outfits):
-            """
-            Wardrobe contains the Outfits for a character 
-            and handles changing the active outfit
-
-            :param fallback: fallback/default outfit for a character
-            :type fallback: Outfit(renpy.store.object)
-            :param outfits: Collection of possible outfits for Actor
-            :type outfits: Set (TODO: change data structure used?)
-            """
-            self.active = fallback
-            self.fallback = fallback
-            self.outfits = outfits
-
-
     # single state of a characters current clothing, data store
-    # collection of clothing pieces and associated values for things character wears
+    # collection of clothing pieces and associated vals. for things character wears
     class Outfit(renpy.store.object):
         def __init__(self, **kwargs):
             # outfit statistics
@@ -80,7 +64,3 @@ init -2 python:
             
 
             # self.acc = ["","",""] # top accessories
-            
-            
-            
-
