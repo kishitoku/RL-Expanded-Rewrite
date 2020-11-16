@@ -1,6 +1,7 @@
 # Testing Enviroment
 #
-# This file is for all major/minor testing. This eventually be replaced by playground mode (Fully functional game but w/ dev cheats)
+# This file is for all major/minor testing. This eventually be replaced by playground mode 
+# (Functional "gameplay-loop" but w/ dev cheats)
 
 define testenv = Location("University Square", adjacent=
                             ["Classroom","Danger Room", "Image Test"], dayCycle=True)
