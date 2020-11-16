@@ -111,6 +111,7 @@ project.json
 *.rpyc
 *.jpeg
 *.png
+*.bak
 /*.exe
 /renpy/
 /lib/
