@@ -300,6 +300,7 @@ screen main_menu():
 
         textbutton _("Start Game") action Start()
         textbutton _("Load Game") action ShowMenu("load")
+        textbutton _("Test Enviroment") action Start("testenv")
         textbutton _("Preferences") action ShowMenu("preferences")
         textbutton _("Help") action Help()
         textbutton _("Disclaimer") action Show("Disclaimer_screen") #ui.callsinnewcontext("Disclaimer_screen_label")
