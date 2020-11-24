@@ -20,14 +20,16 @@ This branch will have each major tagged release version (taken from develop).
 ### ``develop``
 This branch is equivalent to the ``master`` branches seen in legacy git projects.
 
-### ``featurename``
-Any branch with a new feature that is being worked on by more than 1 developer  
-at one time that is too be integrated into the project will have a seperate branch in this repo.
+### ``feature/name``
+Any branch with a new feature that is being worked one or more developers at one time that is too be integrated into the project will have a seperate branch in this repo.
+
+### ``workbranch/name``
+Any branch with a large amount of features that will be integrated into ``develop``. Usually branches with more than one contributor.
 
 ---
 
 ## Pull Requests
-All pull requests will be merged against ``develop``.  
+All pull requests will be merged against either ``develop`` or a ``workbranch/name``.
 All requests to this repo will be treated as one of the below.
 ### Addition
 An addition of code to the repo, this includes an addition of a new feature, systems etc.  
