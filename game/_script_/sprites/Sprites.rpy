@@ -1,9 +1,60 @@
 # Image system based on LayeredImage()
 
 
+
 # Attempting to define a layeredImage here.
 # TODO: Transition this to a statement equivalannt.
 # TODO: Tie into Girl().
+init python:
+    from collections import OrderedDict
+    class LayeredImageT(layeredimage.LayeredImage):
+        def format(self, what, attribute=None, group=None, variant=None, image=None):
+            ff = layeredimage.format_function
+
+            debugvar =  ff(
+                what=what,
+                name=self.name,
+                group=group,
+                variant=variant,
+                attribute=attribute,
+                image=image,
+                image_format=self.image_format)
+            print "NEW"
+            print debugvar
+            return debugvar
+            
+    timg = renpy.image(u'test_body_bare_none',"images/characters/test/test_body_bare_barbell.png")
+    timg2= Image("images/characters/test/test_body_bare_none.png")
+    tdsp = renpy.Displayable()
+
+    ptest = LayeredImage([
+                Attribute("body","none",if_any="bare",variant='bare',default=True,
+                image=timg,anchor=(0.0,0.0),zoom=(0.75)),
+                #Attribute("body","none",if_not='bare',variant='hairy',default=True),
+                #Attribute("head" ,'base',default=True),
+                #Attribute("brows",'normal',default=True),
+                #Attribute("eyes" ,'normal',default=True),
+                #Attribute("mouth",'normal',default=True),
+                #Attribute("hair" ,'normal',default=True),
+                #Attribute("arms"),
+                #Attribute("Chest"),
+                ],name='ptest')#,image_format="images/characters/test/{image}.png")
+    
+    
+    
+    #prawatt = layeredimage.RawAttribute('none')
+    #patt = prawatt.execute(group='body',properties={u'if_any': u'bare', u'variant': u'bare', u'anchor': (0.0, 0.0), u'zoom': 0.75})[0]
+    prawattg = layeredimage.RawAttributeGroup('ptest','body')
+    prawattg.properties = OrderedDict([(u'if_any', u'"bare"'), (u'auto', 'True'), (u'variant', u'"bare"'), (u'anchor', u'(0.0,0.0)'), (u'zoom', u'0.75')])
+    pattg = prawattg.execute()[0]
+    prawlimg = layeredimage.RawLayeredImage('ptest')
+    prawlimg.children = [prawattg]
+    ptest = prawlimg.execute()
+    print('TYPE: {}'.format(type(ptest)))
+    #ptest = layeredimage.LayeredImage([pattg],name='ptest')
+    
+    print "DONE"
+
 layeredimage test:
     #image_format "character/test/{image}.png"
 
@@ -100,3 +151,4 @@ layeredimage test:
     group overlay auto variant "pussy" multiple
 
     group overlay auto variant "face" multiple
+

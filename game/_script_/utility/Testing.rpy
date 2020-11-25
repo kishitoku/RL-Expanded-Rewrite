@@ -7,6 +7,17 @@ define testenv = Location("University Square", adjacent=
                             ["Classroom","Danger Room", "Image Test"], dayCycle=True)
 
 define exampleOutfit = Outfit(top="Nothing")
+init python:
+    class permachar(renpy.character.ADVCharacter):
+        def __init__(s, name, **kwargs):
+            s.name = name
+            s.argpile = {}
+        def __setitem__(s,key,value):
+            s.argpile.update({key:value})
+        def __getitem__(s,key):
+            return argpile[key]
+        
+        
 
 # Test label for layeredimage
 # TODO: Make a proper sprite test environment
@@ -24,6 +35,10 @@ label imageTest:
     test none "Not any more though."
     show test -none
     test "I prefer to wear gloves even when naked."
+    show test
+    test "Starting baseline actor reference"
+    show ptest
+    ptest "Now showing prototype persistent-wardrobe actor"
     show test up
     test "If this worked, the test should end now and return you to the menu."
 

@@ -42,7 +42,7 @@ init -2 python:
             self.name = name
             # Actor's Name for progammatic purposes
             # TODO: Get a better regex to replace the copied from location below
-            self.actName =  = re.sub('[ ]','_',re.sub("[']",'',self.name)).lower()
+            self.actName = re.sub('[ ]','_',re.sub("[']",'',self.name)).lower()
 
             # Constructs a ADVCharacter(object) or Adventure Character,
             # to be used for dialog etc.
